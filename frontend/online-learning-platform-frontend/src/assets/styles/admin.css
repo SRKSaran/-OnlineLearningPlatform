@@ -1,0 +1,40 @@
+.course-card2 {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px;
+    text-align: center;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.course-card2 h2 {
+    margin-top: 0;
+}
+
+.course-card2 button {
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 6rem;
+}
+
+.custom-button {
+    border-radius: 20px;
+    font-size: 15px;
+    padding: 10px 20px;
+    background-color: #13386f;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+    border: none;
+    color: white;
+
+}
+
+.custom-button:hover {
+    background-color: #333d4994;
+    color: #000;
+}
+
+.box {
+    flex-direction: row-reverse;
+}

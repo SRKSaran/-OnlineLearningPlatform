@@ -1,0 +1,15 @@
+.custom-button-2 {
+    border-radius: 20px;
+    font-size: 15px;
+    padding: 10px 20px;
+    background-color: #13386f;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+    border: none;
+    color: white;
+
+}
+
+.custom-button-2:hover {
+    background-color: #333d4994;
+    color: #000;
+}

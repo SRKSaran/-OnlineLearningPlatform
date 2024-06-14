@@ -1,0 +1,28 @@
+.addcourse-form {
+    max-width: 500px;
+    margin: auto;
+}
+
+.addcourse-form .form-control {
+    border-radius: 0.25rem;
+    box-shadow: none;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.addcourse-form .form-control:focus {
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.addcourse-form .btn-primary {
+    background-color: #007bff;
+    border: none;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.addcourse-form .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.cancel:hover {
+    background-color: #dc3545 !important;
+}

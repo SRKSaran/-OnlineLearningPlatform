@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const enrollmentSchema = new mongoose.Schema({
   student: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Student',
+    ref: 'User',
     required: true,
   },
   course: {
@@ -17,7 +17,7 @@ const enrollmentSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['pending', 'enrolled', 'dropped'],
+    enum: ['pending', 'enrolled', 'rejected'],
     default: '',
   },
 });

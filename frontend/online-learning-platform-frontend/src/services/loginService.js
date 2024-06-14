@@ -14,7 +14,8 @@ const loginService = async (email, password) => {
 
     document.cookie = `jwtToken=${encodeURIComponent(token)}; path=/; Secure`;
     setUserIdCookie(response.data.userId);
-    window.location.href = "/student";
+    if(response.data.role === "admin") window.location.href = "/admin";
+    else window.location.href = "/student";
 
   } catch (err) {
     console.log("error");

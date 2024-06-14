@@ -1,13 +1,10 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { validationResult } = require('express-validator');
 
-// Register user as student or handle admin registration
 exports.register = async (req, res) => {
     const { name, address, date, email, phone, password, role } = req.body;
   
-    // Default role to 'student' if not specified
     const userRole = role || 'student';
   
     if (userRole === 'admin') {
@@ -34,7 +31,7 @@ exports.login = async (req, res) => {
   if (!validPass) return res.status(400).send('Invalid password');
 
   const token = jwt.sign({ _id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
-  res.header('Authorization', 'Bearer ' + token).send({  token, userId: user._id  });
+  res.header('Authorization', 'Bearer ' + token).send({  token, userId: user._id, role: user.role });
 };
 
 exports.logout = async (req, res) => {
@@ -42,15 +39,10 @@ exports.logout = async (req, res) => {
 };
 
 exports.createStudent = async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-
-  const { name, address, date, email, phone, password } = req.body;
-  
+    const { name, email, address, phone, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
   try {
-    const student = new User({ name, address, date, email, phone, password });
+    const student = new User({ name, email, address, phone, password: hashedPassword });
     await student.save();
     res.json(student);
   } catch (err) {
@@ -58,44 +50,22 @@ exports.createStudent = async (req, res) => {
   }
 };
 
-// Get all students
 exports.getAllStudents = async (req, res) => {
   try {
-    const students = await User.find();
+    const students = await User.find({ role: 'student' });
     res.json(students);
   } catch (err) {
     res.status(500).send('Server Error');
   }
 };
 
-// Get a student by ID
-exports.getStudentById = async (req, res) => {
-  const { id } = req.params;
-
-  try {
-    const student = await User.findById(id);
-    if (!student) {
-      return res.status(404).json({ error: 'Student not found' });
-    }
-    res.json(student);
-  } catch (err) {
-    res.status(500).send('Server Error');
-  }
-};
-
-// Update a student by ID
 exports.updateStudentById = async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-
   const { id } = req.params;
-  const { name, address, date, email, phone, password } = req.body;
+  const { name, email, phone, address  } = req.body;
 
   try {
     const student = await User.findByIdAndUpdate(id, 
-      { name, email, phone, address, dateOfBirth },
+      { name, email, phone, address },
       { new: true }
     );
     if (!student) {
@@ -107,7 +77,6 @@ exports.updateStudentById = async (req, res) => {
   }
 };
 
-// Delete a student by ID
 exports.deleteStudentById = async (req, res) => {
   const { id } = req.params;
 

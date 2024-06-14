@@ -2,19 +2,18 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
 const enrollmentController = require('../controllers/enrollmentController');
+const admin = require('../middleware/admin');
 
-// POST /api/enrollments/create
 router.post('/createEnrollment', auth, enrollmentController.createEnrollment);
 
-// GET /api/enrollments
-router.get('/getAllEnrollments', auth, enrollmentController.getAllEnrollments);
+router.get('/getAllEnrollments', auth, admin, enrollmentController.getAllEnrollments);
 
-router.get('/getAllEnrolledCourseById/:userId', auth, enrollmentController.getAllEnrolledCourseById);
+router.get('/getPendingEnrollments', auth, admin, enrollmentController.getPendingEnrollments);
 
-// PUT /api/enrollments/:enrollmentId
-router.put('/updateEnrollment/:enrollmentId', auth, enrollmentController.updateEnrollment);
+router.put('/acceptEnrollment/:enrollmentId', auth, admin, enrollmentController.acceptEnrollment);
 
-// DELETE /api/enrollments/:enrollmentId
-router.delete('/deleteEnrollment/:enrollmentId', auth, enrollmentController.deleteEnrollment);
+router.put('/rejectEnrollment/:enrollmentId', auth, admin, enrollmentController.rejectEnrollment);
+
+router.delete('/deleteEnrollment/:enrollmentId', auth, admin, enrollmentController.deleteEnrollment);
 
 module.exports = router;

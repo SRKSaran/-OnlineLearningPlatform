@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import "../assets/styles/student.css";
 import NavBar from "../components/navbar";
 import { getCookie } from "../utils";
-import { getCourses } from "../services/courseService.js"; 
-import { enrollCourse } from "../services/entrolService.js";
+import { getCoursesById } from "../services/courseService.js"; 
+import { enrollCourse } from "../services/enrollService.js";
 import { getUserIdFromCookie } from '../utils';
 
 function StudentPage() {
@@ -16,7 +16,7 @@ function StudentPage() {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const coursesData = await getCourses(token, userId);
+        const coursesData = await getCoursesById(token, userId);
         console.log("coursesData:", coursesData);
         setCourses(coursesData);
         setLoading(false);
