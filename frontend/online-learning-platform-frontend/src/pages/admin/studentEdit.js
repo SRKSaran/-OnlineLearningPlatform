@@ -10,7 +10,6 @@ function EditStudent() {
   const token = getCookie("jwtToken");
   const navigate = useNavigate();
 
-  // State to manage form data
   const [formData, setFormData] = useState({
     name: name || "",
     email: email || "",
@@ -18,7 +17,6 @@ function EditStudent() {
     phone: phone || ""
   });
 
-  // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
@@ -27,7 +25,6 @@ function EditStudent() {
     }));
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     editStudent(token, studentId, formData.name, formData.email, formData.address, formData.phone);

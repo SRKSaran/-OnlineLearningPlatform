@@ -8,7 +8,6 @@ function AddStudent() {
   const token = getCookie("jwtToken");
   const navigate = useNavigate();
 
-  // State to manage form data
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -17,7 +16,6 @@ function AddStudent() {
     password: "",
   });
 
-  // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
@@ -26,7 +24,6 @@ function AddStudent() {
     }));
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     addStudent(

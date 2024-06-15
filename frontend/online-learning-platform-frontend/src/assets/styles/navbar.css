@@ -5,37 +5,34 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.navbar-brand {
+  }
+  
+  .navbar-brand {
     margin: 0;
-}
-
-.navbar-links {
+  }
+  
+  .navbar-links {
     list-style: none;
     display: flex;
     gap: 1rem;
     margin: 0;
-}
-
-.navbar-links li {
-    display: inline;
-}
-
-.navbar-links a {
+  }
+  
+  .navbar-links a {
     color: white;
     text-decoration: none;
     padding: 0.5rem 1rem;
     border-radius: 30px;
     transition: background-color 0.3s ease;
-}
-
-.navbar-links a:hover {
-    background-color: #ffffff;
-    color:#13386f ;
-}
-
-.navbar-logo {
+  }
+  
+  .navbar-links a.active-link {
+    background-color: white;
+    color: #13386f;
+  }
+  
+  .navbar-logo {
     height: 3rem;
     margin-left: 15px;
-}
+  }
+  

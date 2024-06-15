@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import NavBar from "../components/navbar";
-import StudentPage from "../pages/Student";
+import StudentPage from "../pages/student/Student";
 import Admin from "../pages/admin/admin";
 import AddCourse from "../pages/admin/addCourse";
 import EditCourse from "../pages/admin/editCourse";
@@ -13,6 +13,7 @@ import AddStudent from "../pages/admin/studentAdd";
 import ViewEnrollments from "../pages/admin/enrollView";
 import EditEnrollment from "../pages/admin/enrollEdit";
 import AddEnrollment from "../pages/admin/enrollAdd";
+import StudentCourse from "../pages/student/studentCourse";
 
 const AppRoutes = () => {
   return (
@@ -23,6 +24,7 @@ const AppRoutes = () => {
         <Route exact path="/register" element={<Register />} />
         <Route path="/navbar" element={<NavBar />} />
         <Route path="/student" element={<StudentPage />} />
+        <Route path="/student/course" element={<StudentCourse />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin/addCourse" element={<AddCourse />} />
         <Route path="/admin/editCourse" element={<EditCourse />} />

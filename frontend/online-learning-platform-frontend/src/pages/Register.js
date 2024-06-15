@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../assets/styles/signup.css';
 import logo from '../assets/images/logo.png';
-import signupService from '../services/registerService.js';
+import { signupService } from '../services/userService';
 
 function Register() {
   const [formData, setFormData] = useState({

@@ -9,7 +9,6 @@ function AddCourse() {
     const token = getCookie("jwtToken");
     const navigate = useNavigate();
 
-    // State for form data
     const [formData, setFormData] = useState({
         title: '',
         description: '',
@@ -17,7 +16,6 @@ function AddCourse() {
         price: ''
     });
 
-    // Handle input change
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prevState => ({
@@ -26,7 +24,6 @@ function AddCourse() {
         }));
     };
 
-    // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
         addCourse(formData.title, formData.description, formData.instructor, formData.price, token);

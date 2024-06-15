@@ -6,7 +6,7 @@ export const getCoursesById = async (token, userId) => {
     console.log("Token:", token);
 
     try {
-        const response = await axios.get(`${API_URL}/api/enrollments/getAllEnrolledCourseById/${userId}`, {
+        const response = await axios.get(`${API_URL}/api/enrollments/getAllPendingCourseById/${userId}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -107,3 +107,20 @@ export const addCourse = async (title, description, instructor, price, token) =>
     }
 };
 
+export const getEnrolledCoursesById = async (token, userId) => {
+    console.log("Token:", token);
+    console.log("User ID:", userId);
+
+    try {
+        const response = await axios.get(`${API_URL}/api/enrollments/getAllEnrolledCourseById/${userId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching courses', error);
+        throw error;
+    }
+}

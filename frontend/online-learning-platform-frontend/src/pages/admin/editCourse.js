@@ -8,9 +8,8 @@ function EditCourse() {
   const location = useLocation();
   const { courseId, title, description, instructor, price } =
     location.state || {};
-    const token = getCookie("jwtToken");
+  const token = getCookie("jwtToken");
 
-  // State for form data
   const [formData, setFormData] = useState({
     title: title || "",
     description: description || "",
@@ -27,7 +26,14 @@ function EditCourse() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    updateCourse(formData.title, formData.description, formData.instructor, formData.price, courseId, token);
+    updateCourse(
+      formData.title,
+      formData.description,
+      formData.instructor,
+      formData.price,
+      courseId,
+      token
+    );
     console.log("Form submitted:", formData);
   };
   const handleCancelEdit = () => {
@@ -49,8 +55,8 @@ function EditCourse() {
               name="title"
               className="form-control"
               placeholder="Enter course title"
-              value={formData.title} // Bind value to state
-              onChange={handleChange} // Handle input change
+              value={formData.title}
+              onChange={handleChange}
             />
           </div>
           <div className="form-group mb-3">
@@ -60,8 +66,8 @@ function EditCourse() {
               name="description"
               className="form-control"
               placeholder="Enter course description"
-              value={formData.description} // Bind value to state
-              onChange={handleChange} // Handle input change
+              value={formData.description}
+              onChange={handleChange}
             />
           </div>
           <div className="form-group mb-3">
@@ -71,8 +77,8 @@ function EditCourse() {
               name="instructor"
               className="form-control"
               placeholder="Enter instructor's name"
-              value={formData.instructor} // Bind value to state
-              onChange={handleChange} // Handle input change
+              value={formData.instructor} 
+              onChange={handleChange} 
             />
           </div>
           <div className="form-group mb-3">
@@ -82,8 +88,8 @@ function EditCourse() {
               name="price"
               className="form-control"
               placeholder="Enter course price"
-              value={formData.price} // Bind value to state
-              onChange={handleChange} // Handle input change
+              value={formData.price} 
+              onChange={handleChange} 
             />
           </div>
           <div className="d-flex justify-content-between">

@@ -10,14 +10,12 @@ function EditEnrollment() {
   const token = getCookie("jwtToken");
   const navigate = useNavigate();
 
-  // State to manage form data
   const [formData, setFormData] = useState({
     studentName: studentName || "",
     courseName: courseName || "",
     instructor: instructor || ""
   });
 
-  // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
@@ -26,7 +24,6 @@ function EditEnrollment() {
     }));
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     editEnrollment(token, studentId, formData.studentName, courseId, formData.courseName, formData.instructor);

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../assets/styles/login.css'; 
 import logo from '../assets/images/logo.png'; 
-import loginService from '../services/loginService.js';
+import { loginService } from '../services/userService';
 
 function LoginPage() {
     const [formData, setFormData] = useState({

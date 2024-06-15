@@ -2,6 +2,7 @@ const Enrollment = require("../models/Enrollment");
 const Course = require("../models/Course");
 const User = require("../models/User");
 
+// Create Enrollment
 exports.createEnrollment = async (req, res) => {
   const { studentId, courseId, status } = req.body;
 
@@ -19,6 +20,7 @@ exports.createEnrollment = async (req, res) => {
   }
 };
 
+// Get All Enrollments
 exports.getAllEnrollments = async (req, res) => {
   try {
     const enrollments = await Enrollment.find({ status: "enrolled" })
@@ -79,6 +81,7 @@ exports.rejectEnrollment = async (req, res) => {
   }
 };
 
+// Delete Enrollment
 exports.deleteEnrollment = async (req, res) => {
   const { enrollmentId } = req.params;
 
@@ -90,6 +93,59 @@ exports.deleteEnrollment = async (req, res) => {
 
     await Enrollment.deleteOne({ _id: enrollmentId });
     res.json({ msg: "Enrollment removed" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server Error");
+  }
+};
+
+// Get Enrollment by userId
+exports.getAllPendingCourseById = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    // Find enrollments by student (userId)
+    const enrolledCourses = await Enrollment.find({ student: userId, status: { $in: ["pending", "enrolled"] }});
+
+    // Map the enrollments to get the course IDs
+    const enrolledCourseIds = enrolledCourses.map((enrollment) =>
+      enrollment.course.toString()
+    );
+
+    const allCourses = await Course.find();
+
+    // Filter out the courses that are not enrolled by the user
+    const unmatchedCourses = allCourses.filter(
+      (course) => !enrolledCourseIds.includes(course._id.toString())
+    );
+
+    res.json(unmatchedCourses);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server Error");
+  }
+};
+
+exports.getAllEnrolledCourseById = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    // Find enrollments by student (userId)
+    const enrolledCourses = await Enrollment.find({ student: userId, status: "enrolled"});
+
+    // Map the enrollments to get the course IDs
+    const enrolledCourseIds = enrolledCourses.map((enrollment) =>
+      enrollment.course.toString()
+    );
+
+    const allCourses = await Course.find();
+
+    // Filter out the courses that are not enrolled by the user
+    const matchedCourses = allCourses.filter(
+      (course) => enrolledCourseIds.includes(course._id.toString())
+    );
+
+    res.json(matchedCourses);
   } catch (error) {
     console.error(error);
     res.status(500).send("Server Error");

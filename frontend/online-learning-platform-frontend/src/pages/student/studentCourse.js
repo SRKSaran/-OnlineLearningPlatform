@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import "../assets/styles/student.css";
-import NavBar from "../components/navbar";
-import { getCookie } from "../utils";
-import { getCoursesById } from "../services/courseService.js"; 
-import { enrollCourse } from "../services/enrollService.js";
-import { getUserIdFromCookie } from '../utils';
+import "../../assets/styles/student.css";
+import NavBar from "../../components/navbar.js";
+import { getCookie } from "../../utils.js";
+import { getEnrolledCoursesById } from "../../services/courseService.js"; 
+import { getUserIdFromCookie } from '../../utils.js';
 
-function StudentPage() {
+function StudentCourse() {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -16,7 +15,7 @@ function StudentPage() {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const coursesData = await getCoursesById(token, userId);
+        const coursesData = await getEnrolledCoursesById(token, userId);
         console.log("coursesData:", coursesData);
         setCourses(coursesData);
         setLoading(false);
@@ -28,16 +27,6 @@ function StudentPage() {
 
     fetchCourses();
   }, [token, userId]); 
-
-  const handleEnroll = async (courseId) => {
-    try {
-        const enrollment = await enrollCourse(token, userId, courseId);
-        console.log('Enrollment successful:', enrollment);
-        window.location.reload();
-    } catch (error) {
-        console.error('Enrollment error:', error);
-    }
-};
 
   return (
     <div>
@@ -55,7 +44,6 @@ function StudentPage() {
               <p>{course.description}</p>
               <p>Instructor: {course.instructor}</p>
               <p>Price: ${course.price}</p>
-              <button onClick={() => handleEnroll(course._id)}>Enroll</button>
             </div>
           ))
         )}
@@ -64,4 +52,4 @@ function StudentPage() {
   );
 }
 
-export default StudentPage;
+export default StudentCourse;
