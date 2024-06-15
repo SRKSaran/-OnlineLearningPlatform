@@ -26,7 +26,7 @@ export const loginService = async (email, password) => {
 
 export const logoutService = async (token) => {
   try {
-    await api.post(
+    await axios.post(
       `/api/user/logout`,
       {},
       {

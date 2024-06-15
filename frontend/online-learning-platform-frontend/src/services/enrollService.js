@@ -121,7 +121,7 @@ export const acceptEnrollment = async (token, enrollmentId) => {
                 Authorization: `Bearer ${token}`,
             },
         });
-        window.location.reload();
+        window.location.href = "/admin/viewEnroll";
         return response.data;
     } catch (error) {
         console.error('Error accepting enrollment', error);
@@ -139,7 +139,7 @@ export const rejectEnrollment = async (token, enrollmentId) => {
                 Authorization: `Bearer ${token}`,
             },
         });
-        window.location.reload();
+        window.location.href = "/admin/viewEnroll";
         return response.data;
     } catch (error) {
         console.error('Error rejecting enrollment', error);
