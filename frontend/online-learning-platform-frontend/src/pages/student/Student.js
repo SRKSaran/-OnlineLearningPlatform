@@ -43,7 +43,7 @@ function StudentPage() {
     <div>
       <NavBar />
 
-      <div className="d-flex">
+      <div className="d-flex flex-wrap">
         {loading ? (
           <p>Loading...</p>
         ) : error ? (

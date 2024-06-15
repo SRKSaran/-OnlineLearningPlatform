@@ -61,7 +61,7 @@ const ViewCourse = () => {
             Add Course
           </button>
         </div>
-        <div className="d-flex flex-wrap justify-content-between">
+        <div className="d-flex flex-wrap">
           {loading ? (
             <p>Loading...</p>
           ) : error ? (

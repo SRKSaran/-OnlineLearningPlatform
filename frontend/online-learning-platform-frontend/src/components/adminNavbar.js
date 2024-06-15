@@ -2,7 +2,7 @@ import React from "react";
 import "../assets/styles/navbar.css";
 import logo from "../assets/images/logo.png";
 import { getCookie } from "../utils";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 import { logoutService } from "../services/userService";
 
 function AdminNavBar() {
@@ -25,7 +25,13 @@ function AdminNavBar() {
           <li>
             <a
               href="/admin"
-              className={location.pathname === '/admin' ? 'active-link' : ''}
+              className={
+                location.pathname === "/admin" ||
+                location.pathname === "/admin/addCourse" ||
+                location.pathname === "/admin/editCourse"
+                  ? "active-link"
+                  : ""
+              }
             >
               Courses
             </a>
@@ -33,7 +39,13 @@ function AdminNavBar() {
           <li>
             <a
               href="/admin/viewStudents"
-              className={location.pathname === '/admin/viewStudents' ? 'active-link' : ''}
+              className={
+                location.pathname === "/admin/viewStudents" ||
+                location.pathname === "/admin/addStudent" ||
+                location.pathname === "/admin/editStudent"
+                  ? "active-link"
+                  : ""
+              }
             >
               Students
             </a>
@@ -41,7 +53,13 @@ function AdminNavBar() {
           <li>
             <a
               href="/admin/viewEnroll"
-              className={location.pathname === '/admin/viewEnroll' ? 'active-link' : ''}
+              className={
+                location.pathname === "/admin/viewEnroll" ||
+                location.pathname === "/admin/addEnrollment" ||
+                location.pathname === "/admin/editEnroll"
+                  ? "active-link"
+                  : ""
+              }
             >
               Enroll
             </a>
@@ -50,7 +68,7 @@ function AdminNavBar() {
             <a
               href="#profile"
               onClick={handleLogout}
-              className={location.hash === '#' ? 'active-link' : ''}
+              className={location.hash === "#" ? "active-link" : ""}
             >
               Logout
             </a>
